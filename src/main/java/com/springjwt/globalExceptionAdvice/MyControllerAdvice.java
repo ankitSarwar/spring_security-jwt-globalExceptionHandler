@@ -3,6 +3,7 @@ package com.springjwt.globalExceptionAdvice;
 import com.springjwt.exception.EmptyInputException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -24,11 +25,11 @@ public class MyControllerAdvice extends ResponseEntityExceptionHandler {
     public ResponseEntity<String> NoSuchExceptionHandle(NoSuchElementException exception){
         return new ResponseEntity<>("No value is present in db , please change yore request",HttpStatus.NOT_FOUND);
     }
-
-//   @Override
-    protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    
+// handleHttpRequestMethodNot  <-- type this then select
+    @Override
+    protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 //        return super.handleHttpRequestMethodNotSupported(ex, headers, status, request);
-
-        return new ResponseEntity<Object>("please change http method type", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<Object>("please change http method type", HttpStatus.NOT_ACCEPTABLE);
     }
 }
